@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Blurring Background</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="1.css" />
+  </head>
+  <body>
+    <div class="container">
+     
+	</div>
+	<h1 class="loading-text">0%</h1>
+  </body>
+  <script>
+    let flag = 0;
+    let bg = document.querySelector(".container");
+    let loading = document.querySelector(".loading-text");
+    function loadingText() {
+	  flag++;
+	  if(flag >99)
+	  {
+		  clearInterval(int);
+	  }
+      console.log(flag);
+      loading.innerHTML = `${flag}%`;
+      loading.style.opacity = scale(flag, 0, 100, 1, 0);
+      bg.style.filter = `blur(${scale(flag, 0, 100, 30, 0)}px)`;
+    }
+    const scale = (num, in_min, in_max, out_min, out_max) => {
+      return (
+        ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
+      );
+    };
+    let int =setInterval(loadingText, 30);
+  </script>
+</html>
